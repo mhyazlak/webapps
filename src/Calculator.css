@@ -1,0 +1,93 @@
+.calculator {
+  border-radius: 1rem;
+  width: 40%;
+  height: 800px;
+  background-color: rgb(59, 60, 101);
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.display {
+  height: 7rem;
+  width: 85%;
+  background-color: green;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+  font-family: monospace;
+  font-size: 5rem;
+  margin-top: 3rem;
+  border-radius: 1rem;
+}
+
+#number {
+  margin-right: 0.5rem;
+}
+
+#numpad {
+  width: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "clear delete multi divide"
+    "a7 a8 a9 minus"
+    "a4 a5 a6 plus"
+    "a1 a2 a3 equal"
+    "a0 a0 dot equal";
+  gap: 1rem;
+  color: white;
+  font-family: monospace;
+  font-size: 5rem;
+  margin-top: 2rem;
+  padding: 0;
+}
+.number {
+  background-color: #808080;
+  width: auto;
+  border-radius: 1rem;
+  padding: 0.3rem;
+}
+.number:hover {
+  background-color: #909090;
+  cursor: pointer;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete {
+  background-color: hsla(71, 80%, 36%, 0.617);
+}
+#delete:hover {
+  background-color: hsla(71, 100%, 36%, 0.617);
+}
+
+#clear {
+  background-color: hsla(71, 80%, 36%, 0.617);
+}
+#clear:hover {
+  background-color: hsla(71, 100%, 36%, 0.617);
+}
+
+#equal {
+  background-color: hsl(0, 70%, 40%);
+  grid-area: zero;
+}
+#equal:hover {
+  background-color: hsl(0, 60%, 50%);
+}
+
+@media only screen and (max-width: 790px) {
+  body {
+    background-color: lightblue;
+  }
+  #numpad {
+    font-size: 1rem;
+  }
+}
