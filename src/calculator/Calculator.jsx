@@ -56,7 +56,7 @@ class Calculator extends Component {
       dot: ".",
       equal: "=",
       delete: "Del",
-      clear: "C",
+      // clear: "C",
     };
     return (
       <div className="calculator">

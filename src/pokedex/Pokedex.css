@@ -1,0 +1,79 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pokemon-name {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+#pokedex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.wrapper {
+  height: 80vh;
+  width: 40vw;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#list-of-pokemon {
+  display: flex;
+  flex-direction: column;
+}
+.pokedex-entry {
+  font-size: 3rem;
+  background-color: azure;
+  margin: 1rem;
+  color: black;
+  font-size: 4rem;
+  border-radius: 30%;
+}
+.pokedex-entry:hover,
+.selected {
+  background-color: red;
+  cursor: pointer;
+}
+.type-filter-item {
+  background-color: gray;
+}
+.type-filter-item-text {
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.selected-filter {
+  background-color: yellow;
+}
+
+#filter-section {
+  background-color: blueviolet;
+  height: fit-content;
+}
+
+#list-of-filters {
+  padding: 0;
+  flex-direction: column;
+}
+#list-of-filters > li {
+  padding: 0.2rem 0;
+}
+
+.no-display {
+  display: none;
+}
