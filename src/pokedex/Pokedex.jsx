@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Component } from "react";
+import React, { Component } from "react";
 import filterList from "./filter";
 import "./Pokedex.css";
 import PokemonCardComponent from "./PokemonCardComponent";
@@ -8,6 +8,7 @@ import FilterComponent from "./FilterComponent";
 class Pokedex extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       listOfPokemon: [],
       filteredListOfPokemon: [],
@@ -18,10 +19,16 @@ class Pokedex extends Component {
       },
       pokemonFetched: false,
       filtered: false,
-      currentSelected: 1,
+      currentSelected: 0,
+      expand: false,
     };
 
     this.setFilter = this.setFilter.bind(this);
+    this.expandCard = this.expandCard.bind(this);
+  }
+
+  expandCard() {
+    this.setState({ expand: !this.state.expand });
   }
 
   select(e) {
@@ -30,17 +37,13 @@ class Pokedex extends Component {
     });
   }
 
-  setFilter(e) {
-    let id = e.target.id;
-
-    const newActiveFilters = this.state.activeFilters.typeFilters;
-    if (!newActiveFilters.includes(id)) newActiveFilters.push(id);
-    else newActiveFilters.splice(newActiveFilters.indexOf(id), 1);
+  setFilter(types, number, name) {
     this.setState({
       filtered: false,
       activeFilters: {
-        ...this.state.activeFilters,
-        typeFilters: newActiveFilters,
+        typeFilters: types,
+        nameFilter: name,
+        indexFilter: number,
       },
     });
   }
@@ -48,15 +51,50 @@ class Pokedex extends Component {
   componentDidUpdate(previousProps, previousState) {
     if (this.state.activeFilters !== previousState.activeFilters) {
       let filteredListOfPokemon = this.state.listOfPokemon;
+      let newSelected = this.state.currentSelected;
       filteredListOfPokemon = filterList(
         filteredListOfPokemon,
         this.state.activeFilters
       );
+
       this.setState({
         filteredListOfPokemon: filteredListOfPokemon,
         filtered: true,
-        currentSelected: filteredListOfPokemon[0].id - 1,
+        currentSelected: newSelected,
       });
+    }
+
+    if (previousState.currentSelected === this.state.currentSelected) {
+      if (
+        -1 !==
+        this.state.filteredListOfPokemon.findIndex((p) => {
+          return p.id - 1 == this.state.currentSelected;
+        })
+      ) {
+        document
+          .getElementById(this.state.currentSelected)
+          .classList.toggle("selected");
+
+        //  document
+        //    .getElementById(this.state.currentSelected)
+        //    .scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+    if (previousState.currentSelected !== this.state.currentSelected) {
+      if (
+        -1 !==
+        this.state.filteredListOfPokemon.findIndex((p) => {
+          return p.id - 1 == previousState.currentSelected;
+        })
+      ) {
+        document
+          .getElementById(previousState.currentSelected)
+          .classList.toggle("selected");
+      }
+
+      document
+        .getElementById(this.state.currentSelected)
+        .classList.toggle("selected");
     }
   }
 
@@ -96,8 +134,16 @@ class Pokedex extends Component {
     return (
       <div className="content ">
         <div id="pokedex">
-          <div className="wrapper no-display">
+          <div
+            className={this.state.expand ? "no-display wrapper" : " wrapper"}
+          >
             <ul id="list-of-pokemon">
+              <div className="pokemon-name centered pokedex-entry dummy">
+                dummy
+              </div>
+              <div className="pokemon-name centered pokedex-entry dummy">
+                dummy
+              </div>
               {this.state.pokemonFetched &&
                 this.state.filteredListOfPokemon.map((p, id) => (
                   <div
@@ -109,15 +155,26 @@ class Pokedex extends Component {
                     {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
                   </div>
                 ))}
+              <div className="pokemon-name centered pokedex-entry dummy">
+                dummy
+              </div>
+              <div className="pokemon-name centered pokedex-entry dummy">
+                dummy
+              </div>
             </ul>
           </div>
 
           {this.state.pokemonFetched && (
-            <FilterComponent setFilter={this.setFilter}></FilterComponent>
+            <FilterComponent
+              expand={this.state.expand}
+              setFilter={this.setFilter}
+            ></FilterComponent>
           )}
 
           {this.state.pokemonFetched && (
             <PokemonCardComponent
+              expand={this.state.expand}
+              expandCard={this.expandCard}
               data={{
                 info: this.state.listOfPokemon[this.state.currentSelected],
               }}

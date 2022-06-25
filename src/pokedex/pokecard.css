@@ -1,23 +1,55 @@
-#description {
-  color: black;
-  margin-top: 5rem;
-  font-size: 2rem;
-  text-align: center;
-  background-color: navajowhite;
-  width: 100%;
-  height: 20%;
-  border-bottom-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
+#card-container {
+  border: 5px solid red;
+  height: 70vh;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  transition: 1s;
+  flex-direction: row-reverse;
+  width: 512px;
+  margin-right: 5%;
 }
 
-#showcase {
-  width: 40vw;
-  height: 80vh;
+#card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#image-of-pokemon {
+  background-color: hsl(31, 74%, 85%);
+}
+
+#description {
+  background-color: blue;
+  flex-grow: 1;
+}
+
+/* expanded area */
+
+#information-container {
   background-color: white;
-  border: 5px solid red;
-  border-radius: 2rem;
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+#information-container > section {
+  background-color: gray;
+  font-size: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+#card-container.extended {
+  border-color: green;
+  width: 80vw;
+  flex-direction: row-reverse;
+  position: absolute;
+  right: 0.5rem;
+  margin-right: 10%;
+  transition-delay: 1s;
   transition: 1s;
 }
-#showcase.expanded {
-  background-color: royalblue;
+#information-container {
+  display: block;
+  transition: 1s;
 }

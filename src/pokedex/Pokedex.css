@@ -15,6 +15,7 @@
 }
 
 #pokedex {
+  padding-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -23,10 +24,11 @@
 /* Hide scrollbar for IE, Edge and Firefox */
 .wrapper {
   height: 80vh;
-  width: 40vw;
+  width: 35vw;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
+  transition-delay: 1s;
 }
 .wrapper::-webkit-scrollbar {
   display: none;
@@ -35,10 +37,14 @@
 #list-of-pokemon {
   display: flex;
   flex-direction: column;
+  padding: 0;
 }
 .pokedex-entry {
+  display: flex;
+  flex-direction: row;
+
   font-size: 3rem;
-  background-color: azure;
+  background-color: gray;
   margin: 1rem;
   color: black;
   font-size: 4rem;
@@ -49,31 +55,19 @@
   background-color: red;
   cursor: pointer;
 }
-.type-filter-item {
-  background-color: gray;
+
+.wrapper.no-display {
+  width: 0;
+  transition-delay: 0s;
 }
-.type-filter-item-text {
-  font-size: 2rem;
-  padding: 1rem;
+.dummy.pokedex-entry {
+  opacity: 0;
+  cursor: auto;
+}
+.pokedex-entry-item {
+  padding-left: 1rem;
 }
 
-.selected-filter {
-  background-color: yellow;
-}
-
-#filter-section {
-  background-color: blueviolet;
-  height: fit-content;
-}
-
-#list-of-filters {
-  padding: 0;
-  flex-direction: column;
-}
-#list-of-filters > li {
-  padding: 0.2rem 0;
-}
-
-.no-display {
-  display: none;
+.content {
+  background-color: white;
 }

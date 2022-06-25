@@ -9,8 +9,15 @@ class PokemonCardComponent extends Component {
       data: this.props.data,
       info: null,
       fetched: null,
-      expanded: true,
+      expand: false,
     };
+  }
+
+  componentDidUpdate() {
+    if (this.state.expand != this.props.expand)
+      this.setState({
+        expand: this.props.expand,
+      });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -23,28 +30,42 @@ class PokemonCardComponent extends Component {
   render() {
     let entryNumber = this.state.data.info.id;
     let name = this.state.data.info.name;
+    let pokemonMainType = this.state.data.info.types[0].type.name;
+    let pokemonSecondyType = null;
+
+    try {
+      pokemonSecondyType = this.state.data.info.types[1].type.name;
+    } catch (error) {}
 
     return (
       <div
         id="card-container"
-        className={this.state.expanded ? "expanded" : null}
+        onClick={() => this.props.expandCard()}
+        className={this.state.expand ? "extended" : null}
       >
-        <div
-          id="card"
-          className={this.state.expanded ? "expanded centered" : "centered"}
-        >
+        <div id="card" className={this.state.expand ? "extended" : null}>
           <img
+            id="image-of-pokemon"
             src={this.props.data.info.sprites.other.home.front_default}
             alt="?"
           />
+
           <div
             id="description"
-            className={this.state.expanded ? "expanded" : null}
+            className={this.state.expand ? "extended" : null}
           >
-            <div>{entryNumber}</div>
             <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
           </div>
         </div>
+
+        {
+          <div
+            id="information-container"
+            className={this.state.expand ? "extended" : null}
+          >
+            <section></section>
+          </div>
+        }
       </div>
     );
   }
