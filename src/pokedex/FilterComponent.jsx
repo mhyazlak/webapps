@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./filter.css";
+
 class FilterComponent extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +12,18 @@ class FilterComponent extends Component {
       numberFilter: 0,
       typeFilters: [],
       nameFilter: "",
+      alphabeticalToggle: false,
     };
   }
 
   setFilter(types, number, name) {
-    this.props.setFilter(types, number, name);
+    this.props.setFilter(types, number, name, this.state.alphabeticalToggle);
+  }
+
+  setAlphabeticalToggle() {
+    this.setState({
+      alphabeticalToggle: !this.state.alphabeticalToggle,
+    });
   }
 
   setTypeFilter(e) {
@@ -91,20 +99,37 @@ class FilterComponent extends Component {
         id="filter-section"
         className={this.state.expand ? "no-display" : null}
       >
-        <h2>Filters</h2>
-        <hr />
-        <div id="pokename-seach" className="centered">
-          <div>Search for Name</div>
-          <input type="text" onChange={(e) => this.setNameFilter(e)} />
-        </div>
-
-        <hr />
         <div className="centered">
-          <div>Search for Pokedexnumber</div>
-          <input type="number" onChange={(e) => this.setNumberFilter(e)} />
+          <div className="centered start">
+            <div id="pokename-seach" className="centered">
+              <div className="m">Name: </div>
+              <input type="text" onChange={(e) => this.setNameFilter(e)} />
+            </div>
+
+            <div className="centered row">
+              <div className="centered row m">
+                <div className="m">Number: </div>
+                <input
+                  type="number"
+                  max="999"
+                  min="1"
+                  onChange={(e) => this.setNumberFilter(e)}
+                />
+              </div>
+              <div id="toggle-az" className="">
+                A-Z
+                <label className="switch ">
+                  <input type="checkbox" />
+                  <span
+                    onClick={() => this.setAlphabeticalToggle()}
+                    className="slider round"
+                  ></span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <hr />
         <div className="centered ">
           <ul id="list-of-filters" className="">
             {ListOfFilter.map((f) => {

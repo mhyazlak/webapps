@@ -1,13 +1,28 @@
 #filter-section {
-  background-color: blueviolet;
+  font-size: 1.3rem;
+  background: rgb(98, 18, 18);
+  background: linear-gradient(
+    0deg,
+    rgba(98, 18, 18, 1) 4%,
+    rgba(162, 87, 87, 1) 22%,
+    rgba(97, 47, 47, 1) 43%,
+    rgba(154, 37, 37, 1) 62%,
+    rgba(108, 43, 43, 1) 79%,
+    rgba(158, 16, 16, 1) 96%
+  );
   height: fit-content;
   transition-delay: 1s;
   overflow: hidden;
   width: 312px;
+
+  border-radius: 1.5rem;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.526);
+  padding: 1rem;
 }
 
 #filter-section > h2 {
   text-align: center;
+  font-size: 2rem;
 }
 
 #list-of-filters {
@@ -26,6 +41,11 @@
   width: 0;
   transition-delay: 0s;
 }
+
+h2 {
+  text-shadow: 1px 0px 2px #fff;
+}
+
 .type-icon {
   -webkit-filter: grayscale(100%);
   -moz-filter: grayscale(100%);
@@ -41,4 +61,112 @@
   filter: grayscale(0%);
   background-color: yellow;
   border-radius: 50%;
+}
+
+#toggle-az {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+#pokename-seach {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+  width: fit-content;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: hsl(51, 50%, 30%);
+}
+
+input + .slider {
+  box-shadow: 0 0 5px gold;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.grey {
+  background-color: gray;
+}
+
+.blue {
+  background-color: blue;
+}
+.yellow {
+  background-color: yellow;
+}
+.start {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.m {
+  margin: 0.5rem;
+  margin-left: 0;
+}
+.ml {
+  margin-left: 3rem;
+}
+
+.m2 {
+  margin: 2rem;
+}
+
+.mr {
+  margin-right: 2rem;
 }

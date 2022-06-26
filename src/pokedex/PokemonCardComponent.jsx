@@ -1,6 +1,6 @@
 import { Component } from "react";
-import axios from "axios";
 import "./pokecard.css";
+import adjustCardStyles from "./style";
 
 class PokemonCardComponent extends Component {
   constructor(props) {
@@ -27,6 +27,8 @@ class PokemonCardComponent extends Component {
     return null;
   }
 
+  componentDidMount() {}
+
   render() {
     let entryNumber = this.state.data.info.id;
     let name = this.state.data.info.name;
@@ -41,20 +43,41 @@ class PokemonCardComponent extends Component {
       <div
         id="card-container"
         onClick={() => this.props.expandCard()}
-        className={this.state.expand ? "extended" : null}
+        className={
+          this.state.expand
+            ? `extended ${pokemonMainType}`
+            : `${pokemonMainType}`
+        }
       >
         <div id="card" className={this.state.expand ? "extended" : null}>
           <img
             id="image-of-pokemon"
+            className={pokemonMainType}
             src={this.props.data.info.sprites.other.home.front_default}
             alt="?"
           />
 
           <div
             id="description"
-            className={this.state.expand ? "extended" : null}
+            className={this.state.expand ? "extended " : ""}
           >
-            <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
+            <div className="ml">
+              <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
+              <div>Pokedex: #{entryNumber}</div>
+            </div>
+
+            <div id="types-container" className="mr">
+              <img
+                src={require(`./type-icons/${pokemonMainType}64.png`)}
+                alt=""
+              />
+              {pokemonSecondyType && (
+                <img
+                  src={require(`./type-icons/${pokemonSecondyType}64.png`)}
+                  alt=""
+                />
+              )}
+            </div>
           </div>
         </div>
 

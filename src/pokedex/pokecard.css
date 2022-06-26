@@ -1,13 +1,14 @@
 #card-container {
-  border: 5px solid red;
   height: 70vh;
   border-radius: 1rem;
   overflow: hidden;
   display: flex;
-  transition: 1s;
+  transition: 1.1s;
   flex-direction: row-reverse;
   width: 512px;
   margin-right: 5%;
+  border: #424141 solid 2px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.526);
 }
 
 #card {
@@ -16,13 +17,21 @@
   height: 100%;
 }
 
-#image-of-pokemon {
-  background-color: hsl(31, 74%, 85%);
-}
-
 #description {
-  background-color: blue;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 1px 0px 5px #fff;
+  background: rgb(80, 57, 84);
+  background: radial-gradient(
+    circle,
+    rgb(64, 61, 64) 51%,
+    rgb(32, 32, 33) 100%
+  );
   flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* expanded area */
@@ -40,7 +49,6 @@
   margin-right: 2rem;
 }
 #card-container.extended {
-  border-color: green;
   width: 80vw;
   flex-direction: row-reverse;
   position: absolute;
@@ -52,4 +60,162 @@
 #information-container {
   display: block;
   transition: 1s;
+}
+
+#types-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+#types-container > img {
+  box-shadow: inset 0 0 0 5px gray;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.normal {
+  background: radial-gradient(
+    circle,
+    hsl(59, 10%, 57%) 33%,
+    hsl(59, 31%, 57%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.fire {
+  background: radial-gradient(
+    circle,
+    hsl(26, 82%, 56%) 33%,
+    hsl(26, 50%, 56%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.water {
+  background: radial-gradient(
+    circle,
+    hsl(221, 82%, 60%) 33%,
+    hsl(221, 30%, 66%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.electric {
+  background: radial-gradient(
+    circle,
+    hsl(48, 93%, 57%) 33%,
+    hsl(48, 45%, 57%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.grass {
+  background: radial-gradient(
+    circle,
+    hsl(98, 52%, 54%) 33%,
+    hsl(98, 22%, 54%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.ice {
+  background: radial-gradient(
+    circle,
+    hsl(177, 87%, 72%) 33%,
+    hsl(177, 37%, 72%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.fighting {
+  background: radial-gradient(
+    circle,
+    hsl(2, 56%, 46%) 33%,
+    hsl(2, 26%, 64%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.poison {
+  background: radial-gradient(
+    circle,
+    hsl(301, 35%, 44%) 33%,
+    hsl(301, 20%, 50%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.ground {
+  background: radial-gradient(
+    circle,
+    hsl(43, 48%, 44%) 33%,
+    hsl(43, 68%, 64%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.flying {
+  background: radial-gradient(
+    circle,
+    hsl(256, 81%, 76%) 33%,
+    hsl(256, 81%, 76%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.psychic {
+  background: radial-gradient(
+    circle,
+    hsl(342, 83%, 65%) 33%,
+    hsl(342, 53%, 65%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.bug {
+  background: radial-gradient(
+    circle,
+    hsl(67, 65%, 41%) 33%,
+    hsl(67, 45%, 61%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+
+.rock {
+  background: radial-gradient(
+    circle,
+    hsl(50, 64%, 46%) 33%,
+    hsl(50, 44%, 66%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.ghost {
+  background: radial-gradient(
+    circle,
+    hsl(266, 27%, 47%) 33%,
+    hsl(266, 27%, 57%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.dragon {
+  background: radial-gradient(
+    circle,
+    hsl(257, 97%, 60%) 33%,
+    hsl(257, 67%, 70%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.dark {
+  background: radial-gradient(
+    circle,
+    hsl(24, 23%, 36%) 33%,
+    hsl(24, 13%, 50%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.steel {
+  background: radial-gradient(
+    circle,
+    hsl(240, 16%, 39%) 33%,
+    hsl(240, 19%, 61%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
+}
+.fairy {
+  background: radial-gradient(
+    circle,
+    hsl(330, 50%, 58%) 33%,
+    hsl(330, 50%, 68%) 66%,
+    hsl(25, 14%, 83%) 100%
+  );
 }

@@ -16,6 +16,7 @@ class Pokedex extends Component {
         typeFilters: [],
         nameFilter: "",
         indexFilter: 0,
+        alphabeticalToggle: false,
       },
       pokemonFetched: false,
       filtered: false,
@@ -37,13 +38,14 @@ class Pokedex extends Component {
     });
   }
 
-  setFilter(types, number, name) {
+  setFilter(types, number, name, alphabetical) {
     this.setState({
       filtered: false,
       activeFilters: {
         typeFilters: types,
         nameFilter: name,
         indexFilter: number,
+        alphabeticalToggle: alphabetical,
       },
     });
   }
@@ -63,38 +65,11 @@ class Pokedex extends Component {
         currentSelected: newSelected,
       });
     }
-
-    if (previousState.currentSelected === this.state.currentSelected) {
-      if (
-        -1 !==
-        this.state.filteredListOfPokemon.findIndex((p) => {
-          return p.id - 1 == this.state.currentSelected;
-        })
-      ) {
-        document
-          .getElementById(this.state.currentSelected)
-          .classList.toggle("selected");
-
-        //  document
-        //    .getElementById(this.state.currentSelected)
-        //    .scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }
-    if (previousState.currentSelected !== this.state.currentSelected) {
-      if (
-        -1 !==
-        this.state.filteredListOfPokemon.findIndex((p) => {
-          return p.id - 1 == previousState.currentSelected;
-        })
-      ) {
-        document
-          .getElementById(previousState.currentSelected)
-          .classList.toggle("selected");
-      }
-
-      document
-        .getElementById(this.state.currentSelected)
-        .classList.toggle("selected");
+    if (this.state.pokemonFetched) {
+      this.handleSelection(
+        previousState.currentSelected,
+        this.state.currentSelected
+      );
     }
   }
 
@@ -110,8 +85,8 @@ class Pokedex extends Component {
       const res = await axios
         .all(listOfUrls.map((url) => axios.get(url)))
         .then((res) =>
-          res.forEach((item) => {
-            listOfPokemon.push(item.data);
+          res.forEach((pokemon) => {
+            listOfPokemon.push(pokemon.data);
           })
         );
 
@@ -138,19 +113,13 @@ class Pokedex extends Component {
             className={this.state.expand ? "no-display wrapper" : " wrapper"}
           >
             <ul id="list-of-pokemon">
-              <div className="pokemon-name centered pokedex-entry dummy">
-                dummy
-              </div>
-              <div className="pokemon-name centered pokedex-entry dummy">
-                dummy
-              </div>
               {this.state.pokemonFetched &&
                 this.state.filteredListOfPokemon.map((p, id) => (
                   <div
                     onClick={(e) => this.select(e)}
                     key={p.id - 1}
                     id={p.id - 1}
-                    className="pokemon-name centered pokedex-entry"
+                    className="pokemon-name centered pokedex-entry start"
                   >
                     {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
                   </div>
@@ -184,6 +153,65 @@ class Pokedex extends Component {
       </div>
     );
   }
+
+  handleSelection(prev, curr) {
+    if (prev === curr) {
+      if (
+        -1 !==
+        this.state.filteredListOfPokemon.findIndex((p) => {
+          return p.id - 1 == this.state.currentSelected;
+        })
+      ) {
+        document.getElementById(curr).classList.add("selected");
+        this.sleep(15)
+          .then((r) => {
+            document
+              .getElementById(this.state.currentSelected)
+              .scrollIntoView({ behavior: "smooth", block: "center" });
+          })
+          .catch(() => {
+            if (this.state.filteredListOfPokemon.length !== 0) {
+              document
+                .getElementById(this.state.filteredListOfPokemon[0].id - 1)
+                .scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          });
+      }
+    } else {
+      if (
+        -1 !==
+        this.state.filteredListOfPokemon.findIndex((p) => {
+          return p.id - 1 == curr;
+        })
+      )
+        document.getElementById(curr).classList.add("selected");
+      this.sleep(15)
+        .then((r) => {
+          document
+            .getElementById(this.state.currentSelected)
+            .scrollIntoView({ behavior: "smooth", block: "center" });
+        })
+        .catch(() => {
+          if (this.state.filteredListOfPokemon.length !== 0) {
+            document
+              .getElementById(this.state.filteredListOfPokemon[0].id - 1)
+              .scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+
+      if (
+        -1 !==
+        this.state.filteredListOfPokemon.findIndex((p) => {
+          return p.id - 1 == prev;
+        })
+      ) {
+        document.getElementById(prev).classList.remove("selected");
+      }
+    }
+  }
+  sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
 }
 
 export default Pokedex;
