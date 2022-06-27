@@ -45,7 +45,7 @@
   flex-direction: row;
   width: 30vw;
   font-size: 3rem;
-  background-color: gray;
+  background-color: rgb(49, 48, 48);
   margin: 1rem;
   font-size: 2rem;
   color: white;
@@ -80,7 +80,6 @@
   transition-delay: 0s;
 }
 .dummy.pokedex-entry {
-  opacity: 0;
   cursor: auto;
 }
 .pokedex-entry-item {
@@ -88,7 +87,6 @@
 }
 
 body {
-  height: 97vh;
   background: rgb(49, 45, 112);
   background: linear-gradient(
     76deg,
@@ -96,7 +94,13 @@ body {
     rgba(43, 43, 61, 1) 54%,
     rgba(28, 110, 126, 1) 100%
   );
+  background-repeat: no-repeat;
+  height: fit-content;
 }
 .row {
   flex-direction: row;
+}
+html,
+body {
+  min-height: 100%;
 }

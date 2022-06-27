@@ -33,8 +33,11 @@ class Pokedex extends Component {
   }
 
   select(e) {
+    let element = e.target;
+    if (e.target.nodeName !== "DIV") element = e.target.parentNode;
+
     this.setState(() => {
-      return { currentSelected: e.target.id };
+      return { currentSelected: element.id };
     });
   }
 
@@ -107,7 +110,7 @@ class Pokedex extends Component {
   render() {
     document.title = "Pokedex";
     return (
-      <div className="content ">
+      <div className="content bg-pokemon ">
         <div id="pokedex">
           <div
             className={this.state.expand ? "no-display wrapper" : " wrapper"}
@@ -121,15 +124,16 @@ class Pokedex extends Component {
                     id={p.id - 1}
                     className="pokemon-name centered pokedex-entry start"
                   >
-                    {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
+                    <span className="ml">
+                      {" "}
+                      {p.id.toString().padStart(3, "0")}
+                    </span>
+
+                    <span className="mr">
+                      {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
+                    </span>
                   </div>
                 ))}
-              <div className="pokemon-name centered pokedex-entry dummy">
-                dummy
-              </div>
-              <div className="pokemon-name centered pokedex-entry dummy">
-                dummy
-              </div>
             </ul>
           </div>
 
