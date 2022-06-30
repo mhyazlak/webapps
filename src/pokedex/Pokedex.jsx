@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import filterList from "./filter";
-import "./Pokedex.css";
+import "./css/Pokedex.css";
 import PokemonCardComponent from "./PokemonCardComponent";
 import FilterComponent from "./FilterComponent";
 

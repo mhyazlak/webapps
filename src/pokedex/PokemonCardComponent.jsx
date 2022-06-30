@@ -1,5 +1,5 @@
 import { Component } from "react";
-import "./pokecard.css";
+import "./css/pokecard.css";
 import adjustCardStyles from "./style";
 
 class PokemonCardComponent extends Component {
